@@ -4,7 +4,7 @@ import Message from "./message";
 
 const Messenger = () => {
   return (
-    <div className="messenger flex w-screen h-5/6 max-w-screen-lg">
+    <div className="messenger flex w-screen h-screen max-w-screen-lg">
       <div className="chatmenu p-10 flex-1 max-w-xs">
         <input
           className="rounded-full bg-white p-3 shadow-lg"
@@ -15,8 +15,8 @@ const Messenger = () => {
         <Conversation />
         <Conversation />
       </div>
-      <div className="m-2 chatbox border-2 border-green-300 rounded-xl p-10 flex-1 w-2/3">
-        <div className="chatboxwrapper h-screen h-5/6">
+      <div className="m-2 chatbox border-2 h-screen max-h-[95vh] border-green-300 rounded-xl p-10 flex-1 w-2/3">
+        <div className="chatboxwrapper h-[90%] overflow-scroll ">
           <Message />
           <Message own={true} />
           <Message />
@@ -32,7 +32,7 @@ const Messenger = () => {
           <Message own={true} />
         </div>
 
-        <div className="chatBoxBottom">
+        <div className="chatBoxBottom bottom-0">
           <input
             className="chatMessageInput w-5/6 rounded-lg m-3 pt-4 p-3"
             placeholder="Type your message here..."
