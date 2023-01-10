@@ -1,0 +1,7 @@
+POST http://localhost:3000/api/conversations
+Content-Type: "application/json"
+
+{
+    senderId:"123456"
+    receiverId: "23894567"
+}

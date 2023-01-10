@@ -9,3 +9,14 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+model Conversations {
+  id      String   @id @default(uuid())
+  members String[]
+}
+
+model Message {
+  conversationId String @id @default(uuid())
+  sender         String
+  text           String
+}
