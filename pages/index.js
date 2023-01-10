@@ -1,8 +1,6 @@
 import Head from "next/head";
-import { Inter } from "@next/font/google";
-import Messenger from "../components/messenger";
-
-const inter = Inter({ subsets: ["latin"] });
+// import Messenger from "../components/messenger";
+import HomePage from "../components/homePage";
 
 export default function Home() {
   return (
@@ -14,7 +12,7 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="h-5/6 flex justify-center">
-        <Messenger />
+        <HomePage />
       </main>
     </>
   );
