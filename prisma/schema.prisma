@@ -11,8 +11,9 @@ datasource db {
 }
 
 model Conversations {
-  id      String   @id @default(uuid())
-  members String[]
+  id        String   @id @default(uuid())
+  members   String[]
+  createdAt DateTime @default(now())
 }
 
 model Message {
