@@ -19,7 +19,7 @@ const Messenger = () => {
         <Conversation />
         <Conversation />
       </div>
-      <div className="mt-8 chatbox border-2 h-screen max-h-[95vh] border-green-300 rounded-xl p-10 flex-1 w-2/3">
+      <div className="mt-8 chatbox border-2 h-screen max-h-[95vh] min-w-xs border-green-300 rounded-xl p-10 flex-1 w-2/3">
         <div className="chatboxwrapper h-[90%] overflow-scroll ">
           <Message />
           <Message own={true} />

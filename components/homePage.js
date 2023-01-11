@@ -3,6 +3,7 @@ import { signInWithPopup } from "firebase/auth";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
+import Messenger from "./messenger";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +24,7 @@ const HomePage = () => {
   return (
     <div>
       {value ? (
-        <Home />
+        <Messenger />
       ) : (
         <div className="homepage flex w-screen h-screen">
           <div className="min-w-1/3 pl-20 pt-20">
@@ -38,15 +39,25 @@ const HomePage = () => {
                 It's quick and easy, and it's free
               </p>
             </div>
-            <div className="googlebox flex flex-row h-1/2 mt-40 justify-center content-center">
-              <button className="border-2 h-fit rounded-lg w-2/5 p-5 py-2 space-between googborder flex">
+            <div className="googlebox flex flex-col h-[60%] justify-center items-center">
+              <button
+                className="border-2 h-fit rounded-lg py-2 px-20 googborder flex"
+                onClick={SignIn}
+              >
                 <Image
                   src="/messageStuff/Google.svg"
                   width={25}
                   height={25}
                 ></Image>
-                <p className="pl-7">Sign in with Google</p>
+                <p className="pl-5">Sign in with Google</p>
               </button>
+              <p className="text-sm pt-3">
+                Don't have an account?
+                <hmm className="text-blue-700"> Sign Up</hmm>
+              </p>
+            </div>
+            <div className={inter.className}>
+              <p className="italic herotext text-center">@Weframetech.com</p>
             </div>
           </div>
           <div className="flex flex-col justify-center mr-10 items-end w-2/3">
