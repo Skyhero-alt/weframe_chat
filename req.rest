@@ -1,7 +1,22 @@
-POST http://localhost:3000/api/conversations
-Content-Type: "application/json"
+POST http://localhost:3000/api/conversations HTTP/1.1
+content-Type: application/json
 
 {
-    senderId:"123456"
-    receiverId: "23894567"
+    "senderId":"222222",
+    "receiverId":"23894567"
 }
+###
+POST http://localhost:3000/api/messages HTTP/1.1
+content-Type: application/json
+
+{
+    "conversationId":"b6070e1c-7f0f-4b92-ab12-b1a1dbe6b5cf",
+    "sender":"222222",
+    "text": "Hello! testingggg again"
+}
+###
+GET http://localhost:3000/api/conversations/23894567 HTTP/1.1
+
+###
+GET http://localhost:3000/api/messages/b6070e1c-7f0f-4b92-ab12-b1a1dbe6b5cf HTTP/1.1
+###

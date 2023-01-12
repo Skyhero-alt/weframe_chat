@@ -12,6 +12,7 @@ const HomePage = () => {
 
   const SignIn = () => {
     signInWithPopup(auth, provider).then((data) => {
+      console.log(data.user);
       setValue(data.user.email);
       localStorage.setItem("email", data.user.email);
     });
