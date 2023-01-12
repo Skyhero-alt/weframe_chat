@@ -1,5 +1,5 @@
 import { auth, provider } from "../firebase/firebase";
-import { signInWithPopup } from "firebase/auth";
+import { signInWithPopup, onAuthStateChanged, signOut } from "firebase/auth";
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
@@ -9,6 +9,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 const HomePage = () => {
   const [value, setValue] = useState("");
+  const [user, setUser] = useState({});
 
   const SignIn = () => {
     signInWithPopup(auth, provider).then((data) => {
@@ -18,9 +19,13 @@ const HomePage = () => {
     });
   };
 
-  useEffect(() => {
-    setValue(localStorage.getItem("email"));
+  onAuthStateChanged(auth, (currUser) => {
+    setUser(currUser);
   });
+
+  // useEffect(() => {
+  //   setValue(localStorage.getItem("email"));
+  // });
 
   return (
     <div>

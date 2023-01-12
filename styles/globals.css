@@ -24,7 +24,8 @@ body {
   background: #EFF6FCDE;
 }
 
-.sendButton {
+.sendButton,
+.leftpanel {
   background: #1FCD9D;
 }
 

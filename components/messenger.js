@@ -5,6 +5,25 @@ import Message from "./message";
 const Messenger = () => {
   return (
     <div className="messenger flex w-screen h-screen max-w-screen-lg">
+      <div className="leftpanel mt-7 mr-7 rounded-xl w-[70px] h-[95vh]">
+        <div className="my-10 flex justify-center items-center">
+          <Image
+            className="rounded-full border-green-100  border-2"
+            src="/messageStuff/profile.png"
+            width={50}
+            height={50}
+          />
+        </div>
+        <div className="my-10 mt-20 flex justify-center items-center">
+          <Image src="/messageStuff/chat.svg" width={30} height={30} />
+        </div>
+        <div className="my-10 flex justify-center items-center">
+          <Image src="/messageStuff/bell.svg" width={30} height={30} />
+        </div>
+        <div className="my-10 flex justify-center h-full items-center">
+          <Image src="/messageStuff/logout.svg" width={30} height={30} />
+        </div>
+      </div>
       <div className="chatmenu mt-8 flex-1 max-w-xs">
         <div className="relative">
           <input
