@@ -1,30 +1,54 @@
 import Image from "next/image";
 import Conversation from "./conversaton";
 import Message from "./message";
+import { UserContext } from "../contexts/userContext";
+import { useContext, useEffect, useState } from "react";
+import { auth, provider } from "../firebase/firebase";
+import { signOut } from "firebase/auth";
 
 const Messenger = () => {
+  const { user } = useContext(UserContext);
+  const [conversations, setConversations] = useState([]);
+
+  const SignOut = async () => {
+    signOut(auth, provider);
+  };
+
+  useEffect(() => {
+    const getConversations = async () =>
+      await fetch(`/api/conversations/${user.uid}`).then((res) => {
+        setConversations(res.data);
+      });
+  });
+
   return (
     <div className="messenger flex w-screen h-screen max-w-screen-lg">
       <div className="leftpanel mt-7 mr-7 rounded-xl w-[70px] h-[95vh]">
         <div className="my-10 flex justify-center items-center">
           <Image
-            className="rounded-full border-green-100  border-2"
-            src="/messageStuff/profile.png"
+            className="rounded-full border-green-300  border-2"
+            src={user.photoURL}
             width={50}
             height={50}
           />
         </div>
-        <div className="my-10 mt-20 flex justify-center items-center">
-          <Image src="/messageStuff/chat.svg" width={30} height={30} />
+        <div className="my-10 mt-15 flex justify-center items-center">
+          <button>
+            <Image src="/messageStuff/chat.svg" width={30} height={30} />
+          </button>
         </div>
         <div className="my-10 flex justify-center items-center">
-          <Image src="/messageStuff/bell.svg" width={30} height={30} />
+          <button>
+            <Image src="/messageStuff/bell.svg" width={25} height={25} />
+          </button>
         </div>
-        <div className="my-10 flex justify-center h-full items-center">
-          <Image src="/messageStuff/logout.svg" width={30} height={30} />
+        <div className="mt-10 mb-0 flex justify-center h-[50vh] place-items-end">
+          <button onClick={SignOut}>
+            <Image src="/messageStuff/logout.svg" width={25} height={25} />
+          </button>
         </div>
       </div>
-      <div className="chatmenu mt-8 flex-1 max-w-xs">
+      <div className="chatmenu mt-8 flex-1 mr-5 max-w-xs">
         <div className="relative">
           <input
             className="rounded-2xl bg-white p-3 pl-12 drop-shadow-xl"
@@ -34,12 +58,25 @@ const Messenger = () => {
             <Image src="/messageStuff/search.svg" width={25} height={25} />
           </div>
         </div>
-        <Conversation />
-        <Conversation />
-        <Conversation />
+        {conversations.map((e) => {
+          <Conversation conversation={c} currentUser={user} />;
+        })}
       </div>
-      <div className="mt-8 chatbox border-2 h-screen max-h-[95vh] min-w-xs border-green-300 rounded-xl p-10 flex-1 w-2/3">
-        <div className="chatboxwrapper h-[90%] overflow-scroll ">
+      <div className="mt-8 chatbox h-screen max-h-[95vh] min-w-xs rounded-xl p-8 pt-3 flex-1 w-2/3">
+        <div className="flex">
+          <Image
+            className="rounded-full border-green-300  border-2"
+            src={user.photoURL}
+            width={50}
+            height={50}
+          />
+          <div className="ml-3 font-medium">
+            <p>{user.displayName}</p>
+            <p className="font-extralight text-sm">Last seen yesterday</p>
+          </div>
+        </div>
+        <hr className="my-2" />
+        <div className="chatboxwrapper h-[85%] overflow-scroll ">
           <Message />
           <Message own={true} />
           <Message />

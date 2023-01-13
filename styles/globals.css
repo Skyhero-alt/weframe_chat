@@ -29,6 +29,10 @@ body {
   background: #1FCD9D;
 }
 
+.chatbox {
+  border: 0.1px solid #1FCD9D;
+}
+
 .chatboxwrapper {
   overflow-y: scroll;
 }

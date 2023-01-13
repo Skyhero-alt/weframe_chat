@@ -1,35 +1,49 @@
 import { auth, provider } from "../firebase/firebase";
 import { signInWithPopup, onAuthStateChanged, signOut } from "firebase/auth";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import { Inter } from "@next/font/google";
 import Messenger from "./messenger";
+import { UserContext } from "../contexts/userContext";
 
 const inter = Inter({ subsets: ["latin"] });
 
 const HomePage = () => {
-  const [value, setValue] = useState("");
-  const [user, setUser] = useState({});
+  const { user, setUser } = useContext(UserContext);
 
-  const SignIn = () => {
-    signInWithPopup(auth, provider).then((data) => {
-      console.log(data.user);
-      setValue(data.user.email);
-      localStorage.setItem("email", data.user.email);
-    });
+  const SignIn = async () => {
+    try {
+      await signInWithPopup(auth, provider)
+        .then((data) => {
+          const { uid, displayName, email, photoURL } = data.user;
+          setUser({ uid, displayName, email, photoURL });
+        })
+        .then(() => {
+          fetch("/api/newUser", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: {
+              name: displayName,
+              email: email,
+              uid: uid,
+              avatar: photoURL,
+            },
+          });
+        });
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   onAuthStateChanged(auth, (currUser) => {
     setUser(currUser);
   });
 
-  // useEffect(() => {
-  //   setValue(localStorage.getItem("email"));
-  // });
-
   return (
     <div>
-      {value ? (
+      {user ? (
         <Messenger />
       ) : (
         <div className="homepage flex w-screen h-screen">
@@ -39,7 +53,7 @@ const HomePage = () => {
                 Welcome to our Global Chat Room!
               </p>
               <p className="text-lg font-extralight mt-10">
-                To join the conversation, simply sign up for an accoun.
+                To join the conversation, simply sign up for an account.
               </p>
               <p className="text-lg font-extralight">
                 It's quick and easy, and it's free
