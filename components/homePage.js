@@ -44,7 +44,13 @@ const HomePage = () => {
         <Messenger />
       ) : (
         <div className="homepage flex max-w-[1280px] w-screen h-screen">
-          <div className="min-w-1/3 pl-20 pt-20">
+          <div className="min-w-1/3 pl-20 pt-16">
+            <Image
+              className="pb-10"
+              src="/messageStuff/Logo.svg"
+              height={40}
+              width={300}
+            />
             <div className="herotext text-6xl font-semibold">
               <p className={inter.className}>
                 Welcome to our Global Chat Room!
@@ -56,7 +62,7 @@ const HomePage = () => {
                 It's quick and easy, and it's free
               </p>
             </div>
-            <div className="googlebox flex flex-col h-[55%] pr-[10%] justify-center items-center">
+            <div className="googlebox flex flex-col h-[46%] pr-[10%] justify-center items-center">
               <button
                 className="border-2 h-fit rounded-lg py-2 px-20 googborder flex"
                 onClick={SignIn}
