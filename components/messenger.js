@@ -63,9 +63,8 @@ const Messenger = () => {
       }).then(async (res) => {
         const json = await res.json();
         console.log(json);
-        setMessages([...messages, json]).then(() => {
-          setNewMessage("");
-        });
+        setMessages([...messages, json]);
+        setNewMessage("");
       });
     } catch (error) {
       console.log(error);
