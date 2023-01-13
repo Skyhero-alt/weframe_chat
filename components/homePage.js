@@ -49,7 +49,7 @@ const HomePage = () => {
               className="pb-10"
               src="/messageStuff/Logo.svg"
               height={40}
-              width={300}
+              width={270}
             />
             <div className="herotext text-6xl font-semibold">
               <p className={inter.className}>
