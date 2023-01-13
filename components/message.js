@@ -1,4 +1,6 @@
-const Message = ({ own }) => {
+import { format } from "timeago.js";
+
+const Message = ({ message, own }) => {
   return (
     <div
       className={
@@ -6,9 +8,11 @@ const Message = ({ own }) => {
       }
     >
       <div className="messageText w-fit p-1 px-7 max-w-md rounded-xl bg-green-500">
-        hello this is message
+        {message.text}
       </div>
-      <div className="messageBottom text-sm font-extralight">1 hour ago</div>
+      <div className="messageBottom text-sm font-extralight">
+        {format(message.createdAt)}
+      </div>
     </div>
   );
 };

@@ -11,8 +11,8 @@ content-Type: application/json
 
 {
     "conversationId":"6733e2be-8888-434f-9def-ba7c49b00271",
-    "sender":"7cXJqqYrLyTg4j1CgpmFB84HWnF2",
-    "text": "lolll"
+    "sender":"gGVKniM01MbaifHnjtYngzj6yAv2",
+    "text": "lolll again"
 }
 ###
 GET http://localhost:3000/api/conversations/gGVKniM01MbaifHnjtYngzj6yAv2 HTTP/1.1

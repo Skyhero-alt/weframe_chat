@@ -13,9 +13,11 @@
 
 #### Tasks to be completed:
 
+- Add contact button
 - Fix the null state issue for adding a user
 - Add all the api's on the client side
 - Add socket.io for RTC
+- Add search
 
 #### Post completion:
 
