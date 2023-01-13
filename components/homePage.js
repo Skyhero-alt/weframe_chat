@@ -1,4 +1,4 @@
-import { auth, provider } from "../firebase";
+import { auth, provider } from "../firebase/firebase";
 import { signInWithPopup, onAuthStateChanged, signOut } from "firebase/auth";
 import { useContext, useEffect, useState } from "react";
 import Image from "next/image";
@@ -12,23 +12,28 @@ const HomePage = () => {
   const { user, setUser } = useContext(UserContext);
 
   const SignIn = async () => {
+    let bata;
     try {
-      await signInWithPopup(auth, provider).then((data) => {
-        const { uid, displayName, email, photoURL } = data.user;
-        fetch("/api/newUser", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: {
-            name: displayName,
-            email: email,
-            uid: uid,
-            avatar: photoURL,
-          },
+      await signInWithPopup(auth, provider)
+        .then((data) => {
+          let { uid, displayName, email, photoURL } = data.user;
+          setUser({ uid, displayName, email, photoURL });
+          bata = { uid, displayName, email, photoURL };
+        })
+        .then(async () => {
+          await fetch("/api/newUser", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name: bata.displayName,
+              email: bata.email,
+              uid: bata.uid,
+              avatar: bata.photoURL,
+            }),
+          });
         });
-        setUser({ uid, displayName, email, photoURL });
-      });
     } catch (err) {
       console.log(err);
     }

@@ -2,20 +2,20 @@ POST http://localhost:3000/api/conversations HTTP/1.1
 content-Type: application/json
 
 {
-    "senderId":"4GXiWy64HePCxozKRTbx07LU1bb2",
-    "receiverId":"UCmcA3zzgwcVHBdijKglvkZYkmq1"
+    "senderId":"7cXJqqYrLyTg4j1CgpmFB84HWnF2",
+    "receiverId":"gGVKniM01MbaifHnjtYngzj6yAv2"
 }
 ###
 POST http://localhost:3000/api/messages HTTP/1.1
 content-Type: application/json
 
 {
-    "conversationId":"7b32adf8-9e7a-4bce-9283-108adacaed02",
-    "sender":"4GXiWy64HePCxozKRTbx07LU1bb2",
-    "text": "Hello! lol"
+    "conversationId":"6733e2be-8888-434f-9def-ba7c49b00271",
+    "sender":"7cXJqqYrLyTg4j1CgpmFB84HWnF2",
+    "text": "lolll"
 }
 ###
-GET http://localhost:3000/api/conversations/4GXiWy64HePCxozKRTbx07LU1bb2 HTTP/1.1
+GET http://localhost:3000/api/conversations/gGVKniM01MbaifHnjtYngzj6yAv2 HTTP/1.1
 
 ###
 GET http://localhost:3000/api/messages/7b32adf8-9e7a-4bce-9283-108adacaed02 HTTP/1.1
@@ -29,3 +29,5 @@ content-Type: application/json
     "email": "cdsvdv",
     "avatar": "fwef"
 }
+###
+GET http://localhost:3000/api/getUsers/gGVKniM01MbaifHnjtYngzj6yAv2 HTTP/1.1

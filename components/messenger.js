@@ -3,7 +3,7 @@ import Conversation from "./conversaton";
 import Message from "./message";
 import { UserContext } from "../contexts/userContext";
 import { useContext, useEffect, useState } from "react";
-import { auth, provider } from "../firebase";
+import { auth, provider } from "../firebase/firebase";
 import { signOut } from "firebase/auth";
 
 const Messenger = () => {
@@ -14,12 +14,15 @@ const Messenger = () => {
     signOut(auth, provider);
   };
 
+  const getConversations = async () =>
+    await fetch(`/api/conversations/${user.uid}`).then(async (res) => {
+      let ret = await res.json();
+      setConversations(ret);
+    });
+
   useEffect(() => {
-    const getConversations = async () =>
-      await fetch(`/api/conversations/${user.uid}`).then((res) => {
-        setConversations(res.data);
-      });
-  });
+    getConversations();
+  }, []);
 
   return (
     <div className="messenger flex w-screen h-screen max-w-screen-lg">
@@ -59,8 +62,8 @@ const Messenger = () => {
             <Image src="/messageStuff/search.svg" width={25} height={25} />
           </div>
         </div>
-        {conversations.map((e) => {
-          <Conversation conversation={c} currentUser={user} />;
+        {conversations.map((c) => {
+          return <Conversation conversation={c} />;
         })}
       </div>
       <div className="mt-8 chatbox h-screen max-h-[95vh] min-w-xs rounded-xl p-8 pt-3 flex-1 w-2/3">

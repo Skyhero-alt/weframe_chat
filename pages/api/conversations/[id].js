@@ -14,11 +14,12 @@ export default async function handler(req, res) {
         },
         select: {
           id: true,
+          members: true,
           Message: true,
         },
       });
       console.log(result);
-      res.send(result);
+      res.json(result);
     } catch (err) {
       console.log(err);
       res.status(500).json(err);
