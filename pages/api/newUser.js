@@ -3,7 +3,6 @@ import { PrismaClient } from "@prisma/client";
 const client = new PrismaClient({ log: ["query", "info"] });
 
 export default async function handler(req, res) {
-  let available = true;
   if (req.method == "POST") {
     const exist = await client.Users.findFirst({
       where: {

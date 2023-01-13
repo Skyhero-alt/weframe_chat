@@ -13,25 +13,22 @@ const HomePage = () => {
 
   const SignIn = async () => {
     try {
-      await signInWithPopup(auth, provider)
-        .then((data) => {
-          const { uid, displayName, email, photoURL } = data.user;
-          setUser({ uid, displayName, email, photoURL });
-        })
-        .then(() => {
-          fetch("/api/newUser", {
-            method: "POST",
-            headers: {
-              "Content-Type": "application/json",
-            },
-            body: {
-              name: displayName,
-              email: email,
-              uid: uid,
-              avatar: photoURL,
-            },
-          });
+      await signInWithPopup(auth, provider).then((data) => {
+        const { uid, displayName, email, photoURL } = data.user;
+        fetch("/api/newUser", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: {
+            name: displayName,
+            email: email,
+            uid: uid,
+            avatar: photoURL,
+          },
         });
+        setUser({ uid, displayName, email, photoURL });
+      });
     } catch (err) {
       console.log(err);
     }
@@ -46,7 +43,7 @@ const HomePage = () => {
       {user ? (
         <Messenger />
       ) : (
-        <div className="homepage flex w-screen h-screen">
+        <div className="homepage flex max-w-[1280px] w-screen h-screen">
           <div className="min-w-1/3 pl-20 pt-20">
             <div className="herotext text-6xl font-semibold">
               <p className={inter.className}>
@@ -59,7 +56,7 @@ const HomePage = () => {
                 It's quick and easy, and it's free
               </p>
             </div>
-            <div className="googlebox flex flex-col h-[60%] justify-center items-center">
+            <div className="googlebox flex flex-col h-[55%] pr-[10%] justify-center items-center">
               <button
                 className="border-2 h-fit rounded-lg py-2 px-20 googborder flex"
                 onClick={SignIn}
@@ -69,7 +66,7 @@ const HomePage = () => {
                   width={25}
                   height={25}
                 ></Image>
-                <p className="pl-5">Sign in with Google</p>
+                <p className="pl-3">Sign in with Google</p>
               </button>
               <p className="text-sm pt-3">
                 Don't have an account?
@@ -77,7 +74,9 @@ const HomePage = () => {
               </p>
             </div>
             <div className={inter.className}>
-              <p className="italic herotext text-center">@Weframetech.com</p>
+              <p className="italic pr-[10%] herotext text-center">
+                @Weframetech.com
+              </p>
             </div>
           </div>
           <div className="flex flex-col justify-center mr-10 items-end w-2/3">

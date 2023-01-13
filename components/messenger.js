@@ -23,6 +23,7 @@ const Messenger = () => {
 
   return (
     <div className="messenger flex w-screen h-screen max-w-screen-lg">
+      {console.log(user.email)}
       <div className="leftpanel mt-7 mr-7 rounded-xl w-[70px] h-[95vh]">
         <div className="my-10 flex justify-center items-center">
           <Image
