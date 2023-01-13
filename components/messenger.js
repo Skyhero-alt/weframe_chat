@@ -9,6 +9,8 @@ import { signOut } from "firebase/auth";
 const Messenger = () => {
   const { user } = useContext(UserContext);
   const [conversations, setConversations] = useState([]);
+  const [currentChat, setCurrentChat] = useState(null);
+  const [messages, setMessages] = useState([]);
 
   const SignOut = async () => {
     signOut(auth, provider);
@@ -22,11 +24,25 @@ const Messenger = () => {
 
   useEffect(() => {
     getConversations();
-  }, []);
+  }, [conversations]);
+
+  useEffect(() => {
+    const getMessages = async () => {
+      try {
+        const res = await fetch(`/api/messages/${currentChat.id}`).then(
+          (res) => {
+            setMessages(res.data);
+          }
+        );
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getMessages();
+  }, [currentChat]);
 
   return (
     <div className="messenger flex w-screen h-screen max-w-screen-lg">
-      {console.log(user.email)}
       <div className="leftpanel mt-7 mr-7 rounded-xl w-[70px] h-[95vh]">
         <div className="my-10 flex justify-center items-center">
           <Image
@@ -63,7 +79,15 @@ const Messenger = () => {
           </div>
         </div>
         {conversations.map((c) => {
-          return <Conversation conversation={c} />;
+          return (
+            <Conversation
+              onClick={() => {
+                setCurrentChat(c);
+              }}
+              key={c.id}
+              conversation={c}
+            />
+          );
         })}
       </div>
       <div className="mt-8 chatbox h-screen max-h-[95vh] min-w-xs rounded-xl p-8 pt-3 flex-1 w-2/3">
@@ -80,36 +104,41 @@ const Messenger = () => {
           </div>
         </div>
         <hr className="my-2" />
-        <div className="chatboxwrapper h-[85%] overflow-scroll ">
-          <Message />
-          <Message own={true} />
-          <Message />
-          <Message own={true} />
-          <Message own={true} />
-          <Message own={true} />
-          <Message own={true} />
-          <Message own={true} />
-          <Message own={true} />
-          <Message own={true} />
-          <Message own={true} />
-          <Message own={true} />
-          <Message own={true} />
-        </div>
-
-        <div className="chatBoxBottom bottom-0">
-          <input
-            className="chatMessageInput w-5/6 rounded-lg m-3 pt-4 p-3"
-            placeholder="Type your message here..."
-          ></input>
-          <button className="sendButton rounded-lg p-3">
-            <Image
-              src="/messageStuff/send.svg"
-              alt="send"
-              width={20}
-              height={20}
-            ></Image>
-          </button>
-        </div>
+        {currentChat ? (
+          <div>
+            <div className="chatboxwrapper h-[85%] overflow-scroll ">
+              <Message />
+              <Message own={true} />
+              <Message />
+              <Message own={true} />
+              <Message own={true} />
+              <Message own={true} />
+              <Message own={true} />
+              <Message own={true} />
+              <Message own={true} />
+              <Message own={true} />
+              <Message own={true} />
+              <Message own={true} />
+              <Message own={true} />
+            </div>
+            <div className="chatBoxBottom bottom-0">
+              <input
+                className="chatMessageInput w-5/6 rounded-lg m-3 pt-4 p-3"
+                placeholder="Type your message here..."
+              ></input>
+              <button className="sendButton rounded-lg p-3">
+                <Image
+                  src="/messageStuff/send.svg"
+                  alt="send"
+                  width={20}
+                  height={20}
+                ></Image>
+              </button>
+            </div>
+          </div>
+        ) : (
+          <p className="text-center">Start a conversation</p>
+        )}
       </div>
     </div>
   );
