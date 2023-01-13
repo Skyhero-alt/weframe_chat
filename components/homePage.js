@@ -76,7 +76,9 @@ const HomePage = () => {
               </button>
               <p className="text-sm pt-3">
                 Don't have an account?
-                <hmm className="text-blue-700"> Sign Up</hmm>
+                <button className="text-blue-700" onClick={SignIn}>
+                  Sign Up
+                </button>
               </p>
             </div>
             <div className={inter.className}>
