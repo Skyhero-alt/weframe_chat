@@ -1,5 +1,7 @@
 ### Weframe_Chat
 
+<img src = "https://i.imgur.com/5zAwVAW.png" />
+
 #### Tasks completed:
 
 - Built login UI
