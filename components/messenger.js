@@ -3,7 +3,7 @@ import Conversation from "./conversaton";
 import Message from "./message";
 import { UserContext } from "../contexts/userContext";
 import { useContext, useEffect, useState } from "react";
-import { auth, provider } from "../firebase/firebase";
+import { auth, provider } from "../firebase";
 import { signOut } from "firebase/auth";
 
 const Messenger = () => {

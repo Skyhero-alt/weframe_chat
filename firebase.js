@@ -6,12 +6,12 @@ import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyAMbg0vGbBP1A4zhklt5-sNH0s6X1d7AN0",
-  authDomain: "weframe-chat.firebaseapp.com",
-  projectId: "weframe-chat",
-  storageBucket: "weframe-chat.appspot.com",
-  messagingSenderId: "383717155717",
-  appId: "1:383717155717:web:32e2945f470715285fdaec",
+  apiKey: "AIzaSyB6z8pHPnHGuMzmjGCaRtgXAGcE2Vx0YO4",
+  authDomain: "weframe-chat-30adf.firebaseapp.com",
+  projectId: "weframe-chat-30adf",
+  storageBucket: "weframe-chat-30adf.appspot.com",
+  messagingSenderId: "67082767672",
+  appId: "1:67082767672:web:5666d9f3eef8271ea385cd",
 };
 
 // Initialize Firebase

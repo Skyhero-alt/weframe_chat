@@ -1,4 +1,4 @@
-import { auth, provider } from "../firebase/firebase";
+import { auth, provider } from "../firebase";
 import { signInWithPopup, onAuthStateChanged, signOut } from "firebase/auth";
 import { useContext, useEffect, useState } from "react";
 import Image from "next/image";
