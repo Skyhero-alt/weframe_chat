@@ -20,7 +20,7 @@ const Messenger = () => {
   // const scrollRef = useRef();
 
   useEffect(() => {
-    socket.current = io("ws://localhost:9999");
+    socket.current = io("wss://weframe-backend.onrender.com/");
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         sender: data.senderId,
