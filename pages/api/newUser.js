@@ -27,12 +27,12 @@ export default async function handler(req, res) {
           },
         });
         console.log(result);
-        res.send(result);
+        res.json({ message: "new user" });
       } catch (error) {
         console.error(error);
       }
     } else {
-      console.log("Wrong req method");
+      console.log({ message: "Wrong req method" });
     }
   }
 }

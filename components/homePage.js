@@ -6,11 +6,39 @@ import { Inter } from "@next/font/google";
 import Messenger from "./messenger";
 import { UserContext } from "../contexts/userContext";
 import Head from "next/head";
+import { stringify } from "postcss";
 
 const inter = Inter({ subsets: ["latin"] });
 
 const HomePage = () => {
   const { user, setUser } = useContext(UserContext);
+
+  const createConversations = async (userId) => {
+    try {
+      await fetch(`/api/getUsers/all`).then(async (res) => {
+        const json = await res.json();
+        console.log(json);
+        json.map(async (e) => {
+          if (e.uid !== userId.uid) {
+            console.log(e.uid, userId.uid);
+            const lol = await fetch("http://localhost:3000/api/conversations", {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+              },
+              body: JSON.stringify({
+                senderId: userId.uid,
+                receiverId: e.uid,
+              }),
+            });
+            console.log(await lol.json());
+          }
+        });
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   const SignIn = async () => {
     let bata;
@@ -22,7 +50,7 @@ const HomePage = () => {
           bata = { uid, displayName, email, photoURL };
         })
         .then(async () => {
-          await fetch("/api/newUser", {
+          const res = await fetch("/api/newUser", {
             method: "POST",
             headers: {
               "Content-Type": "application/json",
@@ -33,7 +61,16 @@ const HomePage = () => {
               uid: bata.uid,
               avatar: bata.photoURL,
             }),
-          });
+          })
+            .then((res) => {
+              return res.json();
+            })
+            .then((res) => {
+              console.log(res);
+              if (res.message == "new user") {
+                createConversations(bata);
+              }
+            });
         });
     } catch (err) {
       console.log(err);

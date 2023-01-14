@@ -31,3 +31,5 @@ content-Type: application/json
 }
 ###
 GET http://localhost:3000/api/getUsers/gGVKniM01MbaifHnjtYngzj6yAv2 HTTP/1.1
+###
+GET http://localhost:3000/api/getUsers/all HTTP/1.1
