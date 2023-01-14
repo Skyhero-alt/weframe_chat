@@ -46,7 +46,8 @@ const Messenger = () => {
     getMessages();
   }, [currentChat]);
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     const message = {
       sender: user.uid,
       text: newMessage,
@@ -155,25 +156,25 @@ const Messenger = () => {
               })}
             </div>
             <div className="chatBoxBottom bottom-0">
-              <input
-                className="chatMessageInput w-5/6 rounded-lg m-3 pt-4 p-3"
-                placeholder="Type your message here..."
-                onChange={(e) => {
-                  setNewMessage(e.target.value);
-                }}
-                value={newMessage}
-              ></input>
-              <button
-                className="sendButton rounded-lg p-3"
-                onClick={handleSubmit}
-              >
-                <Image
-                  src="/messageStuff/send.svg"
-                  alt="send"
-                  width={20}
-                  height={20}
-                ></Image>
-              </button>
+              <form onSubmit={handleSubmit}>
+                <input
+                  className="chatMessageInput w-5/6 rounded-lg m-3 pt-4 p-3"
+                  placeholder="Type your message here..."
+                  onChange={(e) => {
+                    setNewMessage(e.target.value);
+                  }}
+                  text="text"
+                  value={newMessage}
+                ></input>
+                <button className="sendButton rounded-lg p-3" type="submit">
+                  <Image
+                    src="/messageStuff/send.svg"
+                    alt="send"
+                    width={20}
+                    height={20}
+                  ></Image>
+                </button>
+              </form>
             </div>
           </>
         ) : (
