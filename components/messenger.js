@@ -5,6 +5,8 @@ import { UserContext } from "../contexts/userContext";
 import { useContext, useEffect, useState, useRef } from "react";
 import { auth, provider } from "../firebase/firebase";
 import { signOut } from "firebase/auth";
+// const [socket, setSocket] = useState(null);
+import { io } from "socket.io-client";
 
 const Messenger = () => {
   const { user } = useContext(UserContext);

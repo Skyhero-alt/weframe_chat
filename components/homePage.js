@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Inter } from "@next/font/google";
 import Messenger from "./messenger";
 import { UserContext } from "../contexts/userContext";
+import Head from "next/head";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -45,6 +46,9 @@ const HomePage = () => {
 
   return (
     <div>
+      <Head>
+        <title>WeFrame Chat</title>
+      </Head>
       {user ? (
         <Messenger />
       ) : (
