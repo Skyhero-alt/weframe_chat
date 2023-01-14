@@ -5,7 +5,6 @@ import { UserContext } from "../contexts/userContext";
 import { useContext, useEffect, useState, useRef } from "react";
 import { auth, provider } from "../firebase/firebase";
 import { signOut } from "firebase/auth";
-// const [socket, setSocket] = useState(null);
 import { io } from "socket.io-client";
 
 const Messenger = () => {
@@ -14,8 +13,35 @@ const Messenger = () => {
   const [currentChat, setCurrentChat] = useState(null);
   const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  const socket = useRef();
+  const [arrivalMessage, setArrivalMessage] = useState(null);
+
   // const [friend, setFriend] = useState([]);
   // const scrollRef = useRef();
+
+  useEffect(() => {
+    socket.current = io("ws://localhost:9999");
+    socket.current.on("getMessage", (data) => {
+      setArrivalMessage({
+        sender: data.senderId,
+        text: data.text,
+        createdAt: Date.now(),
+      });
+    });
+  }, []);
+
+  useEffect(() => {
+    arrivalMessage &&
+      currentChat?.members.includes(arrivalMessage.sender) &&
+      setMessages((prev) => [...prev, arrivalMessage]);
+  }, [arrivalMessage, currentChat]);
+
+  useEffect(() => {
+    socket.current.emit("adduser", user.uid);
+    socket.current.on("getUsers", (users) => {
+      console.log(users);
+    });
+  }, []);
 
   const SignOut = async () => {
     signOut(auth, provider);
@@ -56,6 +82,14 @@ const Messenger = () => {
       text: newMessage,
       conversationId: currentChat.id,
     };
+
+    const receiverId = currentChat.members.find((m) => m != user.uid);
+
+    socket.current.emit("sendMessage", {
+      senderId: user.uid,
+      receiverId,
+      text: newMessage,
+    });
 
     try {
       const res = await fetch(`/api/messages`, {
