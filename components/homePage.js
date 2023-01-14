@@ -21,7 +21,7 @@ const HomePage = () => {
         json.map(async (e) => {
           if (e.uid !== userId.uid) {
             console.log(e.uid, userId.uid);
-            const lol = await fetch("http://localhost:3000/api/conversations", {
+            const lol = await fetch(`/api/conversations`, {
               method: "POST",
               headers: {
                 "Content-Type": "application/json",
