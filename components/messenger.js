@@ -14,6 +14,7 @@ const Messenger = () => {
   const [currentChat, setCurrentChat] = useState(null);
   const [newMessage, setNewMessage] = useState("");
   const [messages, setMessages] = useState([]);
+  // const [friend, setFriend] = useState([]);
   // const scrollRef = useRef();
 
   const SignOut = async () => {

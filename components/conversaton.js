@@ -3,7 +3,7 @@ import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../contexts/userContext";
 
 const Conversation = ({ conversation }) => {
-  const [friend, setFriend] = useState(null);
+  const [friendd, setFriendd] = useState(null);
   const { user } = useContext(UserContext);
 
   const getUser = async () => {
@@ -12,7 +12,7 @@ const Conversation = ({ conversation }) => {
     try {
       const ha = await fetch(`/api/getUsers/${friendId}`).then(async (res) => {
         const lol = await res.json();
-        setFriend(lol);
+        setFriendd(lol);
       });
     } catch (error) {
       console.log(error);
@@ -26,10 +26,10 @@ const Conversation = ({ conversation }) => {
   return (
     <div className="flex py-3 px-1 m-3 hover:bg-sky-200">
       <div className="px-2">
-        {friend && (
+        {friendd && (
           <Image
             className="rounded-full"
-            src={friend.avatar}
+            src={friendd.avatar}
             alt="avatar"
             height={35}
             width={35}
@@ -37,7 +37,7 @@ const Conversation = ({ conversation }) => {
         )}
       </div>
       <div className="name flex py-auto font-medium h-35 justify-center place-items-center">
-        <p>{friend && friend.name}</p>
+        <p>{friendd && friendd.name}</p>
       </div>
     </div>
   );
