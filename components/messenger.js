@@ -22,9 +22,9 @@ const Messenger = () => {
   useEffect(() => {
     // weframe-backend.onrender.com
     socket.current = io("https://weframe-backend.onrender.com", {
-      extraHeaders: {
-        "my-custom-header": "abcd",
-      },
+      // extraHeaders: {
+      //   "my-custom-header": "abcd",
+      // },
     });
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
