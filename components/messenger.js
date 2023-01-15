@@ -21,7 +21,11 @@ const Messenger = () => {
 
   useEffect(() => {
     // weframe-backend.onrender.com
-    socket.current = io("wss://weframe-backend.onrender.com:9999");
+    socket.current = io("https://weframe-backend.onrender.com", {
+      extraHeaders: {
+        "my-custom-header": "abcd",
+      },
+    });
     socket.current.on("getMessage", (data) => {
       setArrivalMessage({
         sender: data.senderId,
