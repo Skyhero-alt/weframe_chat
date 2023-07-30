@@ -10,18 +10,18 @@
 - Completed all the chat components
 - Implemented the database schema using prisma
 - Finished the API routes for the users, conversation and messages
+- Integrated all the api's on the client side
+- Added contact list
+- Added socket.io for RTC
 
 #### Tasks to be completed:
 
 - Add contact button
-- Fix the null state issue for adding a user
-- Add all the api's on the client side
-- Add socket.io for RTC
 - Add search
 
 #### Post completion:
 
-- Make the UI perfect and responsive
+- Make the UI look polished and responsive
 
 ### Database Schema:
 
